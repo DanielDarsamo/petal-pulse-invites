@@ -14,13 +14,253 @@ export type Database = {
   }
   public: {
     Tables: {
-      [_ in never]: never
+      backgrounds: {
+        Row: {
+          blur: number | null
+          created_at: string
+          id: string
+          image_url: string | null
+          opacity: number | null
+          overlay_color: string | null
+          updated_at: string
+          wedding_id: string
+        }
+        Insert: {
+          blur?: number | null
+          created_at?: string
+          id?: string
+          image_url?: string | null
+          opacity?: number | null
+          overlay_color?: string | null
+          updated_at?: string
+          wedding_id: string
+        }
+        Update: {
+          blur?: number | null
+          created_at?: string
+          id?: string
+          image_url?: string | null
+          opacity?: number | null
+          overlay_color?: string | null
+          updated_at?: string
+          wedding_id?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "backgrounds_wedding_id_fkey"
+            columns: ["wedding_id"]
+            isOneToOne: false
+            referencedRelation: "weddings"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      events: {
+        Row: {
+          address: string | null
+          created_at: string
+          event_time: string | null
+          id: string
+          latitude: number | null
+          longitude: number | null
+          marker_color: string | null
+          title: string
+          updated_at: string
+          wedding_id: string
+        }
+        Insert: {
+          address?: string | null
+          created_at?: string
+          event_time?: string | null
+          id?: string
+          latitude?: number | null
+          longitude?: number | null
+          marker_color?: string | null
+          title: string
+          updated_at?: string
+          wedding_id: string
+        }
+        Update: {
+          address?: string | null
+          created_at?: string
+          event_time?: string | null
+          id?: string
+          latitude?: number | null
+          longitude?: number | null
+          marker_color?: string | null
+          title?: string
+          updated_at?: string
+          wedding_id?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "events_wedding_id_fkey"
+            columns: ["wedding_id"]
+            isOneToOne: false
+            referencedRelation: "weddings"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      guestbook: {
+        Row: {
+          created_at: string
+          guest_name: string
+          id: string
+          message: string
+          wedding_id: string
+        }
+        Insert: {
+          created_at?: string
+          guest_name: string
+          id?: string
+          message: string
+          wedding_id: string
+        }
+        Update: {
+          created_at?: string
+          guest_name?: string
+          id?: string
+          message?: string
+          wedding_id?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "guestbook_wedding_id_fkey"
+            columns: ["wedding_id"]
+            isOneToOne: false
+            referencedRelation: "weddings"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      guests: {
+        Row: {
+          allergies: string | null
+          created_at: string
+          full_name: string
+          id: string
+          invitation_code: string
+          meal_preference: string | null
+          plus_one: boolean | null
+          rsvp_status: string | null
+          updated_at: string
+          wedding_id: string
+        }
+        Insert: {
+          allergies?: string | null
+          created_at?: string
+          full_name: string
+          id?: string
+          invitation_code: string
+          meal_preference?: string | null
+          plus_one?: boolean | null
+          rsvp_status?: string | null
+          updated_at?: string
+          wedding_id: string
+        }
+        Update: {
+          allergies?: string | null
+          created_at?: string
+          full_name?: string
+          id?: string
+          invitation_code?: string
+          meal_preference?: string | null
+          plus_one?: boolean | null
+          rsvp_status?: string | null
+          updated_at?: string
+          wedding_id?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "guests_wedding_id_fkey"
+            columns: ["wedding_id"]
+            isOneToOne: false
+            referencedRelation: "weddings"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      music: {
+        Row: {
+          autoplay: boolean | null
+          created_at: string
+          file_path: string
+          id: string
+          updated_at: string
+          volume: number | null
+          wedding_id: string
+        }
+        Insert: {
+          autoplay?: boolean | null
+          created_at?: string
+          file_path: string
+          id?: string
+          updated_at?: string
+          volume?: number | null
+          wedding_id: string
+        }
+        Update: {
+          autoplay?: boolean | null
+          created_at?: string
+          file_path?: string
+          id?: string
+          updated_at?: string
+          volume?: number | null
+          wedding_id?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "music_wedding_id_fkey"
+            columns: ["wedding_id"]
+            isOneToOne: false
+            referencedRelation: "weddings"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      weddings: {
+        Row: {
+          copyright_text: string | null
+          couple1_name: string
+          couple2_name: string
+          created_at: string
+          id: string
+          updated_at: string
+          user_id: string
+          wedding_date: string | null
+        }
+        Insert: {
+          copyright_text?: string | null
+          couple1_name: string
+          couple2_name: string
+          created_at?: string
+          id?: string
+          updated_at?: string
+          user_id: string
+          wedding_date?: string | null
+        }
+        Update: {
+          copyright_text?: string | null
+          couple1_name?: string
+          couple2_name?: string
+          created_at?: string
+          id?: string
+          updated_at?: string
+          user_id?: string
+          wedding_date?: string | null
+        }
+        Relationships: []
+      }
     }
     Views: {
       [_ in never]: never
     }
     Functions: {
-      [_ in never]: never
+      generate_invitation_code: {
+        Args: Record<PropertyKey, never>
+        Returns: string
+      }
     }
     Enums: {
       [_ in never]: never
