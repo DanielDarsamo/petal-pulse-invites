@@ -1,4 +1,4 @@
-import { Palette, Music, Calendar, Users, Plus, LogOut } from "lucide-react"
+import { Palette, Music, Calendar, Users, Plus, LogOut, Quote, Gift, TableProperties } from "lucide-react"
 import {
   Sidebar,
   SidebarContent,
@@ -27,13 +27,16 @@ interface DashboardSidebarProps {
   onWeddingSelect: (wedding: Wedding) => void
   onCreateWedding: () => void
   activeTab: string
-  onTabChange: (tab: 'design' | 'events' | 'guests' | 'music') => void
+  onTabChange: (tab: 'design' | 'events' | 'guests' | 'music' | 'quotes' | 'gifts' | 'seating') => void
 }
 
 const navigationItems = [
   { id: 'design', title: 'Design', icon: Palette },
   { id: 'events', title: 'Events', icon: Calendar },
+  { id: 'quotes', title: 'Quotes', icon: Quote },
+  { id: 'gifts', title: 'Gift Registry', icon: Gift },
   { id: 'guests', title: 'Guests', icon: Users },
+  { id: 'seating', title: 'Seating', icon: TableProperties },
   { id: 'music', title: 'Music', icon: Music },
 ]
 

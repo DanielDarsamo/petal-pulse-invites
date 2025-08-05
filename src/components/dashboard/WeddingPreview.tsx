@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react"
 import { supabase } from "@/integrations/supabase/client"
+import { useWeddingPreview } from "@/contexts/WeddingPreviewContext"
 
 interface Wedding {
   id: string
@@ -29,47 +30,19 @@ interface WeddingPreviewProps {
 }
 
 export function WeddingPreview({ wedding }: WeddingPreviewProps) {
-  const [background, setBackground] = useState<Background | null>(null)
-  const [events, setEvents] = useState<Event[]>([])
-
-  useEffect(() => {
-    if (wedding) {
-      fetchWeddingData()
-    }
-  }, [wedding])
-
-  const fetchWeddingData = async () => {
-    if (!wedding) return
-
-    try {
-      // Fetch background
-      const { data: backgroundData } = await supabase
-        .from('backgrounds')
-        .select('*')
-        .eq('wedding_id', wedding.id)
-        .maybeSingle()
-
-      if (backgroundData) {
-        setBackground(backgroundData)
-      }
-
-      // Fetch events
-      const { data: eventsData } = await supabase
-        .from('events')
-        .select('*')
-        .eq('wedding_id', wedding.id)
-        .order('event_time', { ascending: true })
-
-      setEvents(eventsData || [])
-    } catch (error) {
-      console.error('Error fetching wedding data:', error)
-    }
-  }
+  const { previewData } = useWeddingPreview()
+  
+  // Use real-time preview data when available, fallback to props
+  const displayWedding = previewData.wedding || wedding
+  const background = previewData.background
+  const events = previewData.events
+  const quote = previewData.wedding?.quote
+  const quoteAuthor = previewData.wedding?.quote_author
 
   const generateMonogram = () => {
-    if (!wedding) return 'A&B'
-    const initial1 = wedding.couple1_name.charAt(0).toUpperCase()
-    const initial2 = wedding.couple2_name.charAt(0).toUpperCase()
+    if (!displayWedding) return 'A&B'
+    const initial1 = displayWedding.couple1_name.charAt(0).toUpperCase()
+    const initial2 = displayWedding.couple2_name.charAt(0).toUpperCase()
     return `${initial1}&${initial2}`
   }
 
